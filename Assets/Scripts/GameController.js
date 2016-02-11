@@ -23,7 +23,7 @@ function Update () {
 
 function SpawnEnemies(){
 
-	yield return new WaitForSeconds(timeBeforeSpawning);
+	yield WaitForSeconds(timeBeforeSpawning);
 
 	while(true){
 
@@ -42,10 +42,14 @@ function SpawnEnemies(){
 				Instantiate(enemy, new Vector3 (posX, posY, 0), this.transform.rotation);
 				currentNumberOfEnemies++;
 
-				yield return new WaitForSeconds(timeBetweenEnemies);
+				yield WaitForSeconds(timeBetweenEnemies);
 			}
 		}
 
-		yield return new WaitForSeconds(timeBeforeWaves);
+		yield WaitForSeconds(timeBeforeWaves);
 	}
+}
+
+public function KilledEnemy(){
+	currentNumberOfEnemies--;
 }

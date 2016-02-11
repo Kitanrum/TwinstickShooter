@@ -41,5 +41,7 @@ function OnCollisionEnter2D(theCollision : Collision2D){
 
 	if(health <=0) {
 		Destroy(this.gameObject);
-	}
+		var controller : GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent("GameController") as GameController;
+		controller.KilledEnemy();
+			}
 }
