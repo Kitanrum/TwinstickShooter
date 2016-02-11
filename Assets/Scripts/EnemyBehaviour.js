@@ -3,8 +3,11 @@
 import System.Collections.Generic;
 
 private var player : Transform;
+public var explosion : Transform;
+public var hitSound : AudioClip;
 public var speed : float = 2.0;
 public var health : int = 2.0;
+public var damage : int = 1;
 
 function Start () {
 
@@ -36,6 +39,7 @@ function OnCollisionEnter2D(theCollision : Collision2D){
 		var laser : LaserBehaviour = theCollision.gameObject.GetComponent("LaserBehaviour") as LaserBehaviour;
 		health -= laser.damage;
 		Destroy (theCollision.gameObject);
+		GetComponent.<AudioSource>().PlayOneShot(hitSound);
 
 	}
 
@@ -43,5 +47,13 @@ function OnCollisionEnter2D(theCollision : Collision2D){
 		Destroy(this.gameObject);
 		var controller : GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent("GameController") as GameController;
 		controller.KilledEnemy();
+		controller.IncreaseScore(10);
+
+		if(explosion){
+			var exploder : GameObject = Instantiate(explosion, this.transform.position, this.transform.rotation).gameObject;
+			exploder.GetComponent.<AudioSource>().Play();
+			Destroy(exploder, 2.0);
+		}
+
 			}
 }

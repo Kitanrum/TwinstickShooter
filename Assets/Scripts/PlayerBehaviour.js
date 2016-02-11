@@ -3,12 +3,17 @@
 import System.Collections.Generic;
 
 public var laser : Transform; //the laser we will be shooting
-
+public var shootSound : AudioClip;
+public var hitSound : AudioClip;
+public var death : Transform;
 public var playerSpeed : float = 2.0; //modifier
 private var currentSpeed : float = 0.0; //curent speed
 public var laserDistance : float = 0.2; //from the center, how far the laster will be
 public var fireDelay : float = 0.3; //time in seconds before you shoot next
 private var nextFire : float = 0.0;
+public var health : int = 5.0;
+
+
 
 public var upButton : List.<KeyCode>;
 public var downButton : List.<KeyCode>;
@@ -106,4 +111,29 @@ public function Shoot(){
 	var posY : float = this.transform.position.y + (Mathf.Sin((transform.localEulerAngles.z - 90) * Mathf.Deg2Rad) * -laserDistance);
 
 	Instantiate(laser, new Vector3 (posX, posY,0), this.transform.rotation);
+	GetComponent.<AudioSource>().PlayOneShot(shootSound);
+}
+
+function OnCollisionEnter2D(theCollision : Collision2D){
+
+	if(theCollision.gameObject.name.Contains("enemy")){
+
+		var enemy : EnemyBehaviour = theCollision.gameObject.GetComponent("EnemyBehaviour") as EnemyBehaviour;
+		health -= enemy.damage;
+		GetComponent.<AudioSource>().PlayOneShot(hitSound);
+	}
+
+	if(health <=0){
+
+		Destroy(this.gameObject);
+		var controller : GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent("GameController") as GameController;
+		controller.DecreaseLives(1);
+
+		if(death){
+			var exploder : GameObject = Instantiate(death, this.transform.position, this.transform.rotation).gameObject;
+			exploder.GetComponent.<AudioSource>().Play();
+			Destroy(exploder,2.0);
+		}
+
+	}
 }

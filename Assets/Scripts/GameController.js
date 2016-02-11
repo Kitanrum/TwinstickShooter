@@ -11,6 +11,14 @@ public var timeBeforeWaves : float = 2.0;
 public var enemiesPerWave : float = 10.0;
 private var currentNumberOfEnemies : float = 0;
 
+private var score : int = 0;
+private var waveNumber = 0;
+public var lives : int = 5;
+
+public var scoreText : UI.Text;
+public var waveText : UI.Text;
+public var livesText : UI.Text;
+
 function Start () {
 
 	StartCoroutine(SpawnEnemies());
@@ -30,6 +38,9 @@ function SpawnEnemies(){
 		if(currentNumberOfEnemies <= 0){
 			var randDirection : float;
 			var randDistance : float;
+
+			waveNumber++;
+			waveText.text = "Wave: " + waveNumber;
 
 			for (var i : int = 0; i < enemiesPerWave; i++){
 
@@ -52,4 +63,16 @@ function SpawnEnemies(){
 
 public function KilledEnemy(){
 	currentNumberOfEnemies--;
+}
+
+public function IncreaseScore(increase : int){
+	score += increase;
+	scoreText.text = "Score: " + score;
+}
+
+public function DecreaseLives(decrease : int){
+
+	lives -=decrease;
+	livesText.text = "Lives: " + lives;
+
 }
