@@ -10,7 +10,6 @@ public var health : int = 2.0;
 public var damage : int = 1;
 
 function Start () {
-
 	player = GameObject.Find("playerShip").transform;
 
 }
@@ -29,6 +28,7 @@ function Movement(){
 	transform.position = transform.position + (delta * moveSpeed);
 
 }
+
 
 function OnCollisionEnter2D(theCollision : Collision2D){
 
@@ -55,5 +55,5 @@ function OnCollisionEnter2D(theCollision : Collision2D){
 			Destroy(exploder, 2.0);
 		}
 
-			}
+	}
 }

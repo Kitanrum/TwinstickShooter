@@ -19,14 +19,9 @@ public var scoreText : UI.Text;
 public var waveText : UI.Text;
 public var livesText : UI.Text;
 
-function Start () {
-
-	StartCoroutine(SpawnEnemies());
-
-}
 
 function Update () {
-
+	StartCoroutine(SpawnEnemies());
 }
 
 function SpawnEnemies(){
@@ -54,6 +49,7 @@ function SpawnEnemies(){
 				currentNumberOfEnemies++;
 
 				yield WaitForSeconds(timeBetweenEnemies);
+
 			}
 		}
 
@@ -68,11 +64,4 @@ public function KilledEnemy(){
 public function IncreaseScore(increase : int){
 	score += increase;
 	scoreText.text = "Score: " + score;
-}
-
-public function DecreaseLives(decrease : int){
-
-	lives -=decrease;
-	livesText.text = "Lives: " + lives;
-
 }

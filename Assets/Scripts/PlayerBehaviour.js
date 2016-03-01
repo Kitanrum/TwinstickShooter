@@ -3,9 +3,9 @@
 import System.Collections.Generic;
 
 public var laser : Transform; //the laser we will be shooting
+public var player : Transform;
 public var shootSound : AudioClip;
 public var hitSound : AudioClip;
-public var death : Transform;
 public var playerSpeed : float = 2.0; //modifier
 private var currentSpeed : float = 0.0; //curent speed
 public var laserDistance : float = 0.2; //from the center, how far the laster will be
@@ -13,7 +13,7 @@ public var fireDelay : float = 0.3; //time in seconds before you shoot next
 private var nextFire : float = 0.0;
 public var health : int = 5.0;
 
-
+public var dead: boolean;
 
 public var upButton : List.<KeyCode>;
 public var downButton : List.<KeyCode>;
@@ -24,24 +24,34 @@ public var shootButton : List.<KeyCode>;
 //the last movement that we made
 private var lastMovement : Vector3 = new Vector3();
 
+
 function Update () {
 	
-	Rotation(); //Runs the Rotation script every frame
-	Movement(); //Runs the Movement script every frame
-	
-	for (KeyCode in shootButton){
-		
-		if(Input.GetKey(KeyCode) && nextFire < 0){
-			nextFire = fireDelay;
-			Shoot();
-			break;
-		}
+	var PauseMenu : PauseMenu;
+	if(Input.GetKeyUp("escape")){
+		//if false becomes true and vice versa
+		PauseMenu.isPaused = !PauseMenu.isPaused;
+	}
+	if(!PauseMenu.isPaused){
+		Rotation();
+		Movement();
 
+		for (KeyCode in shootButton){
+		
+			if(Input.GetKey(KeyCode) && nextFire < 0){
+				nextFire = fireDelay;
+				Shoot();
+				break;
+			}
+
+		}
+			nextFire -= Time.deltaTime;
 	}
 
-	nextFire -= Time.deltaTime;
+
 
 }
+
 
 //Controls the rotation of the character
 function Rotation () {
@@ -112,28 +122,4 @@ public function Shoot(){
 
 	Instantiate(laser, new Vector3 (posX, posY,0), this.transform.rotation);
 	GetComponent.<AudioSource>().PlayOneShot(shootSound);
-}
-
-function OnCollisionEnter2D(theCollision : Collision2D){
-
-	if(theCollision.gameObject.name.Contains("enemy")){
-
-		var enemy : EnemyBehaviour = theCollision.gameObject.GetComponent("EnemyBehaviour") as EnemyBehaviour;
-		health -= enemy.damage;
-		GetComponent.<AudioSource>().PlayOneShot(hitSound);
-	}
-
-	if(health <=0){
-
-		Destroy(this.gameObject);
-		var controller : GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent("GameController") as GameController;
-		controller.DecreaseLives(1);
-
-		if(death){
-			var exploder : GameObject = Instantiate(death, this.transform.position, this.transform.rotation).gameObject;
-			exploder.GetComponent.<AudioSource>().Play();
-			Destroy(exploder,2.0);
-		}
-
-	}
 }

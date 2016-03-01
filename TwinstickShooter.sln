@@ -1,14 +1,30 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-
+Project("{0A959241-A74F-4545-4F82-EE8F20954551}") = "TwinstickShooter", "Assembly-CSharp-firstpass.csproj", "{B1C4C15F-F89A-F9DE-2330-1FD1E3FCEEED}"
+EndProject
+Project("{0A959241-A74F-4545-4F82-EE8F20954551}") = "TwinstickShooter", "Assembly-CSharp.csproj", "{1A8E6AB9-9D3D-A41F-C224-6DD085503729}"
+EndProject
+Project("{0A959241-A74F-4545-4F82-EE8F20954551}") = "TwinstickShooter", "Assembly-CSharp-Editor.csproj", "{4F3CF37B-D059-FD49-0D79-E542256678D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{B1C4C15F-F89A-F9DE-2330-1FD1E3FCEEED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C4C15F-F89A-F9DE-2330-1FD1E3FCEEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C4C15F-F89A-F9DE-2330-1FD1E3FCEEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C4C15F-F89A-F9DE-2330-1FD1E3FCEEED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8E6AB9-9D3D-A41F-C224-6DD085503729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8E6AB9-9D3D-A41F-C224-6DD085503729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8E6AB9-9D3D-A41F-C224-6DD085503729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8E6AB9-9D3D-A41F-C224-6DD085503729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F3CF37B-D059-FD49-0D79-E542256678D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F3CF37B-D059-FD49-0D79-E542256678D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F3CF37B-D059-FD49-0D79-E542256678D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F3CF37B-D059-FD49-0D79-E542256678D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
